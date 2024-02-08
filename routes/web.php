@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InstructorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +30,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+/////// Admin Group Middleware
+Route::middleware(['auth', 'roles:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'Admindashboard'])->name('admin.dashboard');
+});
+/////// Instructor Group Middleware
+Route::middleware(['auth', 'roles:instructor'])->group(function () {
+    Route::get('/instructor/dashboard', [InstructorController::class, 'Instructordashboard'])->name('Instructor.dashboard');
+});
+
+require __DIR__ . '/auth.php';
