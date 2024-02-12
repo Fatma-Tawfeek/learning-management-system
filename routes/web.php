@@ -33,7 +33,15 @@ Route::middleware('auth')->group(function () {
 /////// Admin Group Middleware
 Route::middleware(['auth', 'roles:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Admindashboard'])->name('admin.dashboard');
+    Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+    Route::post('/admin/profile/update', [AdminController::class, 'AdminProfileUpdate'])->name('admin.profile.update');
+    Route::get('/admin/change-password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
+    Route::put('/admin/password-update', [AdminController::class, 'AdminPasswordUpdate'])->name('admin.password.update');
 });
+
+Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+
 /////// Instructor Group Middleware
 Route::middleware(['auth', 'roles:instructor'])->group(function () {
     Route::get('/instructor/dashboard', [InstructorController::class, 'Instructordashboard'])->name('Instructor.dashboard');
