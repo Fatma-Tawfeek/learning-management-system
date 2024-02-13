@@ -31,20 +31,41 @@ Route::middleware('auth')->group(function () {
 });
 
 /////// Admin Group Middleware
-Route::middleware(['auth', 'roles:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'Admindashboard'])->name('admin.dashboard');
-    Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
-    Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
-    Route::post('/admin/profile/update', [AdminController::class, 'AdminProfileUpdate'])->name('admin.profile.update');
-    Route::get('/admin/change-password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
-    Route::put('/admin/password-update', [AdminController::class, 'AdminPasswordUpdate'])->name('admin.password.update');
-});
+Route::group(
+    [
+        'middleware' => ['auth', 'roles:admin'],
+        'prefix' => 'admin',
+        'as' => 'admin.',
+    ],
+    function () {
+        Route::get('/dashboard', [AdminController::class, 'AdminDashboard'])->name('dashboard');
+        Route::get('/logout', [AdminController::class, 'AdminLogout'])->name('logout');
+        Route::get('/profile', [AdminController::class, 'AdminProfile'])->name('profile');
+        Route::put('/profile/update', [AdminController::class, 'AdminProfileUpdate'])->name('profile.update');
+        Route::get('/change-password', [AdminController::class, 'AdminChangePassword'])->name('change.password');
+        Route::put('/password-update', [AdminController::class, 'AdminPasswordUpdate'])->name('password.update');
+    }
+);
 
 Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
 /////// Instructor Group Middleware
-Route::middleware(['auth', 'roles:instructor'])->group(function () {
-    Route::get('/instructor/dashboard', [InstructorController::class, 'Instructordashboard'])->name('Instructor.dashboard');
-});
+Route::group(
+    [
+        'middleware' => ['auth', 'roles:instructor'],
+        'prefix' => 'instructor',
+        'as' => 'instructor.',
+    ],
+    function () {
+        Route::get('/dashboard', [InstructorController::class, 'Instructordashboard'])->name('dashboard');
+        Route::get('/profile', [InstructorController::class, 'InstructorProfile'])->name('profile');
+        Route::put('/profile/update', [InstructorController::class, 'InstructorProfileUpdate'])->name('profile.update');
+        Route::get('/change-password', [InstructorController::class, 'InstructorChangePassword'])->name('change.password');
+        Route::put('/password-update', [InstructorController::class, 'InstructorPasswordUpdate'])->name('password.update');
+        Route::get('/logout', [InstructorController::class, 'InstructorLogout'])->name('logout');
+    }
+);
+
+Route::get('instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
 
 require __DIR__ . '/auth.php';
