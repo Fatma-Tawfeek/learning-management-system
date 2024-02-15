@@ -20,14 +20,24 @@ use App\Http\Controllers\InstructorController;
 Route::get('/', [UserController::class, 'home'])->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('frontend.dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+/////// User Group Middleware
+Route::group(
+    [
+        'middleware' => ['auth'],
+        'prefix' => 'user',
+        'as' => 'user.',
+    ],
+    function () {
+        Route::get('/profile', [UserController::class, 'UserProfile'])->name('profile');
+        Route::put('/profile/update', [UserController::class, 'UserProfileUpdate'])->name('profile.update');
+        Route::get('/change-password', [UserController::class, 'UserChangePassword'])->name('change.password');
+        Route::put('/password-update', [UserController::class, 'UserPasswordUpdate'])->name('password.update');
+        Route::get('/logout', [UserController::class, 'UserLogout'])->name('logout');
+    }
+);
 
 /////// Admin Group Middleware
 Route::group(
