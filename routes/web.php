@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,14 @@ Route::group(
         Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
         Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
         Route::get('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+        // Subؤategory
+        Route::get('/subcategories', [SubCategoryController::class, 'index'])->name('subcategories.index');
+        Route::get('/subcategories/create', [SubCategoryController::class, 'create'])->name('subcategories.create');
+        Route::post('/subcategories/store', [SubCategoryController::class, 'store'])->name('subcategories.store');
+        Route::get('/subcategories/{subcategory}/edit', [SubCategoryController::class, 'edit'])->name('subcategories.edit');
+        Route::put('/subcategories/{subcategory}', [SubCategoryController::class, 'update'])->name('subcategories.update');
+        Route::get('/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subcategories.destroy');
     }
 );
 

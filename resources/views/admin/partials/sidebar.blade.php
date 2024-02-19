@@ -28,7 +28,9 @@
                 <div class="menu-title">Manage Category</div>
             </a>
             <ul>
-                <li> <a href="{{ route('admin.categories.index') }}"><i class='bx bx-radio-circle'></i>All Category</a>
+                <li> <a href="{{ route('admin.categories.index') }}"><i class='bx bx-radio-circle'></i>All Categories</a>
+                </li>
+                <li> <a href="{{ route('admin.subcategories.index') }}"><i class='bx bx-radio-circle'></i>All Subcategories</a>
                 </li>
                 <li> <a href="{{ route('admin.categories.create') }}"><i class='bx bx-radio-circle'></i>Add Category</a>
                 </li>
