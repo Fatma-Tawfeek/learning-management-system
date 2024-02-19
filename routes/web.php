@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\Backend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +53,14 @@ Route::group(
         Route::put('/profile/update', [AdminController::class, 'AdminProfileUpdate'])->name('profile.update');
         Route::get('/change-password', [AdminController::class, 'AdminChangePassword'])->name('change.password');
         Route::put('/password-update', [AdminController::class, 'AdminPasswordUpdate'])->name('password.update');
+
+        // Category
+        Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+        Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::get('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     }
 );
 
