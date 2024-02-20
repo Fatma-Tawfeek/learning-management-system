@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}"/>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 	<link href="{{ asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 

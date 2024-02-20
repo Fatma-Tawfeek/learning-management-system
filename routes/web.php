@@ -70,6 +70,10 @@ Route::group(
         Route::get('/subcategories/{subcategory}/edit', [SubCategoryController::class, 'edit'])->name('subcategories.edit');
         Route::put('/subcategories/{subcategory}', [SubCategoryController::class, 'update'])->name('subcategories.update');
         Route::get('/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subcategories.destroy');
+
+        // Instructors
+        Route::get('/instructors', [AdminController::class, 'Instructors'])->name('instructors.index');
+        Route::post('/update/user-status', [AdminController::class, 'UpdateUserStatus'])->name('update.user.status');
     }
 );
 

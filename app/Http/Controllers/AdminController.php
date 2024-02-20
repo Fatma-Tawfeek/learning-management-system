@@ -106,4 +106,22 @@ class AdminController extends Controller
     {
         return view('admin.login');
     }
+
+    public function Instructors()
+    {
+        $instructors = User::where('role', 'instructor')->latest()->get();
+        return view('admin.instructors.index', compact('instructors'));
+    }
+
+    public function UpdateUserStatus(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $status = $request->input('status', 0);
+
+        User::where('id', $user_id)->update([
+            'status' => $status
+        ]);
+
+        return response()->json(['message' => 'Status updated successfully.']);
+    }
 }

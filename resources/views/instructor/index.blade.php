@@ -3,6 +3,13 @@
 @section('content')
 
 <div class="page-content">
+  
+    @if (Auth::user()->status == '1')
+    <h4>Instructor Account Is <span class="badge rounded-pill bg-success">Active</span></h4>
+    @else
+    <h4>Instructor Account Is <span class="badge rounded-pill bg-danger">Inactive</span></h4>
+    <p class="text-danger"><b>Please wait for admin to activate your account</b></p>
+    @endif
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
        <div class="col">
          <div class="card radius-10 border-start border-0 border-4 border-info">

@@ -20,6 +20,7 @@
             </a>
         </li>
 
+        @if(Auth::user()->status == '1')
         <li class="menu-label">UI Elements</li>
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -108,7 +109,9 @@
                 </div>
                 <div class="menu-title">Support</div>
             </a>
-        </li>
+        </li>            
+        @endif
+
     </ul>
     <!--end navigation-->
 </div>
