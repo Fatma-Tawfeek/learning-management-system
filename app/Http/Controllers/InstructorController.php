@@ -106,4 +106,37 @@ class InstructorController extends Controller
 
         return back()->with($notification);
     }
+
+    public function BecomeInstructor()
+    {
+        return view('frontend.instructor.register');
+    }
+
+    public function InstructorRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'password' => 'required',
+        ]);
+
+        User::insert([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+            'role' => 'instructor',
+            'status' => '0',
+        ]);
+
+        $notification = [
+            'message' => 'Instructor Account Created Successfully',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('instructor.login')->with($notification);
+    }
 }

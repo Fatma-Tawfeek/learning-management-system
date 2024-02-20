@@ -63,7 +63,7 @@ Route::group(
         Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
         Route::get('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
-        // Subؤategory
+        // SubCategory
         Route::get('/subcategories', [SubCategoryController::class, 'index'])->name('subcategories.index');
         Route::get('/subcategories/create', [SubCategoryController::class, 'create'])->name('subcategories.create');
         Route::post('/subcategories/store', [SubCategoryController::class, 'store'])->name('subcategories.store');
@@ -74,6 +74,9 @@ Route::group(
 );
 
 Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+
+Route::get('become-instructor', [InstructorController::class, 'BecomeInstructor'])->name('become.instructor');
+Route::post('instructor-register', [InstructorController::class, 'InstructorRegister'])->name('instructor.register');
 
 /////// Instructor Group Middleware
 Route::group(
