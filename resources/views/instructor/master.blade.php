@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/semi-dark.css') }}"/>
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}"/>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+	<link href="{{ asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 	<title>Instructor Dashboard</title>
 </head>
 
@@ -69,9 +70,41 @@
 	<script>
 		new PerfectScrollbar(".app-container")
 	</script>
-	
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+	{{-- Editor --}}
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+	tinymce.init({
+		selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+		plugins: 'powerpaste advcode table lists checklist',
+		toolbar: 'undo redo | blocks| bold italic | bullist numlist checklist | code | table'
+	});
+	</script>
+
+    {{-- Datatable --}}
+	<script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="{{ asset('backend/assets/js/code.js') }}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		} );
+	</script>
+	<script>
+		$(document).ready(function() {
+			var table = $('#example2').DataTable( {
+				lengthChange: false,
+				buttons: [ 'copy', 'excel', 'pdf', 'print']
+			} );
+		
+			table.buttons().container()
+				.appendTo( '#example2_wrapper .col-md-6:eq(0)' );
+		} );
+	</script>
+
+	{{-- toastr --}}	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	<script>
 	 @if(Session::has('message'))
 	 var type = "{{ Session::get('alert-type','info') }}"

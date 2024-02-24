@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use Illuminate\Routing\RouteRegistrar;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,7 @@ Route::group(
         'as' => 'user.',
     ],
     function () {
+        // Profile
         Route::get('/profile', [UserController::class, 'UserProfile'])->name('profile');
         Route::put('/profile/update', [UserController::class, 'UserProfileUpdate'])->name('profile.update');
         Route::get('/change-password', [UserController::class, 'UserChangePassword'])->name('change.password');
@@ -48,6 +51,7 @@ Route::group(
         'as' => 'admin.',
     ],
     function () {
+        // Profile
         Route::get('/dashboard', [AdminController::class, 'AdminDashboard'])->name('dashboard');
         Route::get('/logout', [AdminController::class, 'AdminLogout'])->name('logout');
         Route::get('/profile', [AdminController::class, 'AdminProfile'])->name('profile');
@@ -90,12 +94,19 @@ Route::group(
         'as' => 'instructor.',
     ],
     function () {
+        // Profile
         Route::get('/dashboard', [InstructorController::class, 'Instructordashboard'])->name('dashboard');
         Route::get('/profile', [InstructorController::class, 'InstructorProfile'])->name('profile');
         Route::put('/profile/update', [InstructorController::class, 'InstructorProfileUpdate'])->name('profile.update');
         Route::get('/change-password', [InstructorController::class, 'InstructorChangePassword'])->name('change.password');
         Route::put('/password-update', [InstructorController::class, 'InstructorPasswordUpdate'])->name('password.update');
         Route::get('/logout', [InstructorController::class, 'InstructorLogout'])->name('logout');
+
+        // Courses
+        Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+        Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
+        Route::post('/courses/store', [CourseController::class, 'store'])->name('courses.store');
+        Route::get('/subcategory/ajax/{category_id}', [CourseController::class, 'GetSubCategory']);
     }
 );
 
