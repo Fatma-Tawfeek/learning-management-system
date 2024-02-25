@@ -106,6 +106,12 @@ Route::group(
         Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
         Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
         Route::post('/courses/store', [CourseController::class, 'store'])->name('courses.store');
+        Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+        Route::put('/courses/{course}', [CourseController::class, 'update'])->name('courses.update');
+        Route::put('/courses/{course}/update-image', [CourseController::class, 'UpdateCourseImage'])->name('courses.update.image');
+        Route::put('/courses/{course}/update-video', [CourseController::class, 'UpdateCourseVideo'])->name('courses.update.video');
+        Route::put('/courses/{course}/update-goal', [CourseController::class, 'UpdateCourseGoal'])->name('courses.update.goal');
+        Route::get('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
         Route::get('/subcategory/ajax/{category_id}', [CourseController::class, 'GetSubCategory']);
     }
 );

@@ -45,8 +45,8 @@
                                 <td>{{ $course->selling_price }}</td>
                                 <td>{{ $course->discount_price }}</td>
                                 <td>
-                                    <a href="{{ route('admin.categories.edit', $course) }}" class="btn btn-success px-5">Edit</a>
-                                    <a href="{{ route('admin.categories.destroy', $course) }}" class="btn btn-danger px-5" id="delete">Delete</a>
+                                    <a href="{{ route('instructor.courses.edit', $course) }}" class="btn btn-success px-5">Edit</a>
+                                    <a href="{{ route('instructor.courses.destroy', $course) }}" class="btn btn-danger px-5" id="delete">Delete</a>
                                 </td>
                             </tr>                
                         @endforeach
